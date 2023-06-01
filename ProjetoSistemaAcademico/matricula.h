@@ -2,11 +2,10 @@
 #define MATRICULA_H
 
 #include <QString>
-#include "disciplina.h"
 #include "aluno.h"
 #include "turma.h"
 
-class Matricula : public Disciplina , public Aluno, public Turma
+class Matricula : public Aluno, public Turma
 {
 private:
     int ano;

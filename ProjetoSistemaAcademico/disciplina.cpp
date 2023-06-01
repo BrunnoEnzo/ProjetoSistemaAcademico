@@ -27,5 +27,8 @@ QString Disciplina::toString()const
 
 Disciplina::Disciplina()
 {
-
+}
+Disciplina::Disciplina(QString cod_disciplina,QString nome_disciplina){
+    this->cod_disciplina=cod_disciplina;
+    this->nome_disciplina=nome_disciplina;
 }

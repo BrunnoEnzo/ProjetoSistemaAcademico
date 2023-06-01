@@ -57,5 +57,14 @@ QString Matricula::toString()const{
 
 Matricula::Matricula()
 {
-
 }
+
+Matricula::Matricula(int ano,int semestre,int nota1,int nota2)
+{
+    this->ano=ano;
+    this->semestre=semestre;
+    this->nota1=nota1;
+    this->nota2=nota2;
+}
+
+

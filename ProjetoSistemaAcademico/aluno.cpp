@@ -20,18 +20,17 @@ void Aluno::setMatricula(const QString &newMatricula)
     matricula = newMatricula;
 }
 
-Aluno::Aluno()
-{
-
-}
-
-Aluno::Aluno(QString mat, QString nom){
-    matricula=mat;
-    nom=nome;
-}
-
 QString Aluno::toString() const
 {
     return matricula+";"+nome;
+}
+
+Aluno::Aluno()
+{
+}
+
+Aluno::Aluno(QString mat, QString nome){
+    matricula=mat;
+    this->nome=nome;
 }
 
