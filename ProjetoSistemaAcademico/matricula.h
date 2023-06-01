@@ -4,8 +4,9 @@
 #include <QString>
 #include "disciplina.h"
 #include "aluno.h"
+#include "turma.h"
 
-class Matricula : public Disciplina , public Aluno
+class Matricula : public Disciplina , public Aluno, public Turma
 {
 private:
     int ano;

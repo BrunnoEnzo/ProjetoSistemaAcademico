@@ -35,4 +35,3 @@ QString Aluno::toString() const
     return matricula+";"+nome;
 }
 
-
