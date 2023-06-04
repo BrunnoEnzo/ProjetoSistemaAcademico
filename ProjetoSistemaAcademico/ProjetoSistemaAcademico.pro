@@ -10,18 +10,28 @@ CONFIG += c++17
 
 SOURCES += \
     aluno.cpp \
+    alunodao.cpp \
+    dao.cpp \
     disciplina.cpp \
+    disciplinadao.cpp \
     main.cpp \
     mainwindow.cpp \
     matricula.cpp \
-    turma.cpp
+    matriculadao.cpp \
+    turma.cpp \
+    turmadao.cpp
 
 HEADERS += \
     aluno.h \
+    alunodao.h \
+    dao.h \
     disciplina.h \
+    disciplinadao.h \
     mainwindow.h \
     matricula.h \
-    turma.h
+    matriculadao.h \
+    turma.h \
+    turmadao.h
 
 FORMS += \
     mainwindow.ui
