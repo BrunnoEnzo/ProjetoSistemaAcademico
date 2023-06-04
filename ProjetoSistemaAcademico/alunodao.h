@@ -9,18 +9,18 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
-
 class AlunoDAO : public DAO<Aluno>
 {
-private:
-    QString nomeBD;
-    QSqlDatabase db;
 public:
     AlunoDAO();
     void incluir(Aluno* obj);
     Aluno* buscar(Aluno* obj);
-    void alterar (Aluno* obj);
+    void alterar(Aluno* obj);
     Aluno* remover(Aluno* obj);
+private:
+    QString nomeBD;
+    QSqlDatabase db;
+
 };
 
 #endif // ALUNODAO_H

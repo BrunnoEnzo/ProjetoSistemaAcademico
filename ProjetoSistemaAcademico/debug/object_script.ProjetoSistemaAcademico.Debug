@@ -1,0 +1,12 @@
+debug/aluno.o
+debug/alunodao.o
+debug/dao.o
+debug/disciplina.o
+debug/disciplinadao.o
+debug/main.o
+debug/mainwindow.o
+debug/matricula.o
+debug/matriculadao.o
+debug/turma.o
+debug/turmadao.o
+debug/moc_mainwindow.o

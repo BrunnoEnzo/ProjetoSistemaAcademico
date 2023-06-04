@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Aluno">
      <attribute name="title">
@@ -98,7 +98,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula"/>
+        <widget class="QLineEdit" name="lineEditMatriculaAluno"/>
        </item>
       </layout>
      </widget>
@@ -197,7 +197,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_8"/>
+        <widget class="QLineEdit" name="lineEditCodTurmaMatricula"/>
        </item>
       </layout>
      </widget>
@@ -219,7 +219,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_7"/>
+        <widget class="QLineEdit" name="lineEditMatricula"/>
        </item>
       </layout>
      </widget>
@@ -241,7 +241,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_15"/>
+        <widget class="QLineEdit" name="lineEditSubTurmaMatricula"/>
        </item>
       </layout>
      </widget>
@@ -263,7 +263,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_9"/>
+        <widget class="QLineEdit" name="lineEditCodDisciplinaMatricula"/>
        </item>
       </layout>
      </widget>
@@ -285,7 +285,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_10"/>
+        <widget class="QLineEdit" name="lineEditAnoMatricula"/>
        </item>
       </layout>
      </widget>
@@ -329,7 +329,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_14"/>
+        <widget class="QLineEdit" name="lineEditNotaFinal"/>
        </item>
       </layout>
      </widget>
@@ -351,7 +351,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_13"/>
+        <widget class="QLineEdit" name="lineEditNota2Matricula"/>
        </item>
       </layout>
      </widget>
@@ -373,7 +373,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_12"/>
+        <widget class="QLineEdit" name="lineEditNota1Matricula"/>
        </item>
       </layout>
      </widget>
@@ -450,7 +450,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_6"/>
+        <widget class="QLineEdit" name="lineEditCodDisciplinaTurma"/>
        </item>
       </layout>
      </widget>
@@ -472,7 +472,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_2"/>
+        <widget class="QLineEdit" name="lineEditCodigoTurma"/>
        </item>
       </layout>
      </widget>
@@ -494,7 +494,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_3"/>
+        <widget class="QLineEdit" name="lineEditMaximoTurma"/>
        </item>
       </layout>
      </widget>
@@ -516,7 +516,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditNome_2"/>
+        <widget class="QLineEdit" name="lineEditSubTurma"/>
        </item>
       </layout>
      </widget>
@@ -538,7 +538,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_4"/>
+        <widget class="QLineEdit" name="lineEditNumeroTurma"/>
        </item>
       </layout>
      </widget>
@@ -615,7 +615,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_5"/>
+        <widget class="QLineEdit" name="lineEditCodigoDisciplina"/>
        </item>
       </layout>
      </widget>
@@ -637,7 +637,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditNome_3"/>
+        <widget class="QLineEdit" name="lineEditNomeDisciplina"/>
        </item>
       </layout>
      </widget>

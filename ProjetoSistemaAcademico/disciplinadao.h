@@ -13,14 +13,14 @@
 class DisciplinaDAO : public DAO<Disciplina>
 {
 private:
-    QString nomeDB;
+    QString nomeBD;
     QSqlDatabase db;
 public:
     DisciplinaDAO();
     void incluir(Disciplina* obj);
     Disciplina* buscar(Disciplina* obj);
     void alterar(Disciplina* obj);
-    Aluno* remover(Disciplina* obj);
+    Disciplina* remover(Disciplina* obj);
 };
 
 #endif // DISCIPLINADAO_H

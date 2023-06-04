@@ -59,8 +59,13 @@ Matricula::Matricula()
 {
 }
 
-Matricula::Matricula(int ano,int semestre,int nota1,int nota2)
+Matricula::Matricula(QString matricula,QString cod_turma,int sub_turma,QString cod_disciplina,
+                     int ano,int semestre,int nota1,int nota2)
 {
+    this->setMatricula(matricula);
+    this->setCod_turma(cod_turma);
+    this->setSub_turma(sub_turma);
+    this->setCod_disciplina(cod_disciplina);
     this->ano=ano;
     this->semestre=semestre;
     this->nota1=nota1;

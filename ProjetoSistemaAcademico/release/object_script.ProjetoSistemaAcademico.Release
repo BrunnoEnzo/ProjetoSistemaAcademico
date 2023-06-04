@@ -1,0 +1,12 @@
+release/aluno.o
+release/alunodao.o
+release/dao.o
+release/disciplina.o
+release/disciplinadao.o
+release/main.o
+release/mainwindow.o
+release/matricula.o
+release/matriculadao.o
+release/turma.o
+release/turmadao.o
+release/moc_mainwindow.o

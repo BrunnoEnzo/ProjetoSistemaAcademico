@@ -12,14 +12,14 @@
 class MatriculaDAO : public DAO<Matricula>
 {
 private:
-    QString nomeDB;
+    QString nomeBD;
     QSqlDatabase db;
 public:
     MatriculaDAO();
     void incluir(Matricula* obj);
     Matricula* buscar(Matricula* obj);
     void alterar (Matricula* obj);
-    Aluno* remover(Matricula* obj);
+    Matricula* remover(Matricula* obj);
 };
 
 #endif // MATRICULADAO_H

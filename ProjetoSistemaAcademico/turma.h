@@ -13,7 +13,7 @@ private:
     int numAlunos;
 public:
     Turma();
-    Turma(QString cod_turma,int sub_turma,int maxAlunos,int numAlunos);
+    Turma(QString cod_disci,QString cod_turma,int sub_turma,int maxAlunos,int numAlunos);
     const QString &getCod_turma() const;
     void setCod_turma(const QString &newCod_turma);
     int getSub_turma() const;

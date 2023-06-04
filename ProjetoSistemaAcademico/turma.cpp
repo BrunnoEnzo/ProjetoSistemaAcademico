@@ -45,12 +45,14 @@ QString Turma::toString(){
     ";"+QString::number(numAlunos);
 }
 
+
 Turma::Turma()
 {
 }
 
-Turma::Turma(QString cod_turma,int sub_turma,int maxAlunos,int numAlunos)
+Turma::Turma(QString cod_disci,QString cod_turma,int sub_turma,int maxAlunos,int numAlunos)
 {
+    this->setCod_disciplina(cod_disci);
     this->cod_turma=cod_turma;
     this->sub_turma=sub_turma;
     this->maxAlunos=maxAlunos;
