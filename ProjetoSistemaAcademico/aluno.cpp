@@ -1,16 +1,20 @@
 #include "aluno.h"
 
-const QString &Aluno::getNome() const
+Aluno::Aluno()
 {
-    return nome;
+
 }
 
-void Aluno::setNome(const QString &newNome)
-{
-    nome = newNome;
+Aluno::Aluno(QString mat, QString nom){
+    matricula = mat;
+    nome = nom;
 }
 
-const QString &Aluno::getMatricula() const
+Aluno::Aluno(QString mat){
+    matricula = mat;
+}
+
+QString Aluno::getMatricula() const
 {
     return matricula;
 }
@@ -20,17 +24,16 @@ void Aluno::setMatricula(const QString &newMatricula)
     matricula = newMatricula;
 }
 
-QString Aluno::toString() const
+QString Aluno::getNome() const
 {
-    return matricula+";"+nome;
+    return nome;
 }
 
-Aluno::Aluno()
+void Aluno::setNome(const QString &newNome)
 {
+    nome = newNome;
 }
 
-Aluno::Aluno(QString mat, QString nome){
-    matricula=mat;
-    this->nome=nome;
+QString Aluno::toQString()const{
+    return matricula + ";" + nome;
 }
-

@@ -63,8 +63,8 @@ void DisciplinaDAO::alterar(Disciplina* obj){
         }
         QSqlQuery query;
         query.prepare("UPDATE disciplina SET nom_disciplina = :nom WHERE cod_disciplina = :cod ;");
-        query.bindValue(":cod", obj->getNome_disciplina());
-        query.bindValue(":mat", obj->getCod_disciplina());
+        query.bindValue(":nom", obj->getNome_disciplina());
+        query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
             db.close();
             throw QString("Erro ao executar a update");

@@ -2,21 +2,25 @@
 #define ALUNO_H
 
 #include <QString>
-
 class Aluno
 {
-private:
-    QString nome;
-    QString matricula;
-
 public:
     Aluno();
-    Aluno(QString mat, QString nome);
-    QString toString() const;
-    const QString &getNome() const;
-    void setNome(const QString &newNome);
-    const QString &getMatricula() const;
+    Aluno(QString mat);
+    Aluno(QString mat, QString nom);
+
+    QString getMatricula() const;
     void setMatricula(const QString &newMatricula);
+
+    QString getNome() const;
+    void setNome(const QString &newNome);
+
+    QString toQString()const;
+
+private:
+    QString matricula;
+    QString nome;
+
 };
 
 #endif // ALUNO_H

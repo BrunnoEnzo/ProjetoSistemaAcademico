@@ -10,9 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     aluno.cpp \
+    alunocontroller.cpp \
     alunodao.cpp \
     dao.cpp \
     disciplina.cpp \
+    disciplinacontroller.cpp \
     disciplinadao.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -23,9 +25,11 @@ SOURCES += \
 
 HEADERS += \
     aluno.h \
+    alunocontroller.h \
     alunodao.h \
     dao.h \
     disciplina.h \
+    disciplinacontroller.h \
     disciplinadao.h \
     mainwindow.h \
     matricula.h \
