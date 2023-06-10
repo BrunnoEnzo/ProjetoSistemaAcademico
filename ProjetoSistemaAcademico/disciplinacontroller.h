@@ -9,7 +9,7 @@ class DisciplinaController
 {
 public:
     DisciplinaController();
-
+    bool  analisarDisciplina(QString const &cod);
     void incluir(QString const &cod, QString const &nom);
     QString buscar(QString const &cod);
     void alterar(QString const &cod, QString const &nom);

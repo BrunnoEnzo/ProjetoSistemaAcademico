@@ -19,8 +19,10 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     matricula.cpp \
+    matriculacontroller.cpp \
     matriculadao.cpp \
     turma.cpp \
+    turmacontroller.cpp \
     turmadao.cpp
 
 HEADERS += \
@@ -33,8 +35,10 @@ HEADERS += \
     disciplinadao.h \
     mainwindow.h \
     matricula.h \
+    matriculacontroller.h \
     matriculadao.h \
     turma.h \
+    turmacontroller.h \
     turmadao.h
 
 FORMS += \
