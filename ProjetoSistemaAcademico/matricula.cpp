@@ -58,9 +58,14 @@ QString Matricula::toString()const{
 Matricula::Matricula()
 {
 }
-
+Matricula::Matricula(QString matricula,QString cod_turma,int sub_turma,QString cod_disciplina){
+    this->setMatricula(matricula);
+    this->setCod_turma(cod_turma);
+    this->setSub_turma(sub_turma);
+    this->setCod_disciplina(cod_disciplina);
+}
 Matricula::Matricula(QString matricula,QString cod_turma,int sub_turma,QString cod_disciplina,
-                     int ano,int semestre,int nota1,int nota2)
+int ano,int semestre,float nota1,float nota2,float notaf)
 {
     this->setMatricula(matricula);
     this->setCod_turma(cod_turma);
@@ -70,6 +75,7 @@ Matricula::Matricula(QString matricula,QString cod_turma,int sub_turma,QString c
     this->semestre=semestre;
     this->nota1=nota1;
     this->nota2=nota2;
+    this->notaf=notaf;
 }
 
 

@@ -3,6 +3,7 @@
 
 #include "dao.h"
 #include "aluno.h"
+#include "databasemanager.h"
 #include <QString>
 #include <string>
 #include <QtSql>

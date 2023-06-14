@@ -1,8 +1,9 @@
 #ifndef TURMADAO_H
 #define TURMADAO_H
 
-#include <dao.h>
-#include <turma.h>
+#include "dao.h"
+#include "turma.h"
+#include "databasemanager.h"
 #include <QString>
 #include <string>
 #include <QtSql>

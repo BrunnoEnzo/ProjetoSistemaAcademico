@@ -1,8 +1,9 @@
 #ifndef DISCIPLINADAO_H
 #define DISCIPLINADAO_H
 
-#include<dao.h>
-#include<disciplina.h>
+#include "dao.h"
+#include "disciplina.h"
+#include "databasemanager.h"
 #include <QString>
 #include <string>
 #include <QtSql>

@@ -20,7 +20,7 @@ void Disciplina::setNome_disciplina(const QString &newNome_disciplina)
     nome_disciplina = newNome_disciplina;
 }
 
-QString Disciplina::toQString()const
+QString Disciplina::toString()const
 {
     return cod_disciplina+";"+nome_disciplina;
 }

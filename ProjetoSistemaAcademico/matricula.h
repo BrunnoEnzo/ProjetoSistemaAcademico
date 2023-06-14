@@ -15,8 +15,9 @@ private:
     float notaf;
 public:
     Matricula();
+    Matricula(QString matricula,QString cod_turma,int sub_turma,QString cod_disciplina);
     Matricula(QString matricula,QString cod_turma,int sub_turma,QString cod_disciplina,
-    int ano,int semestre,int nota1,int nota2);
+    int ano,int semestre,float nota1,float nota2, float notaf);
     int getAno() const;
     void setAno(int newAno);
     int getSemestre() const;

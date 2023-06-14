@@ -30,7 +30,7 @@ QString DisciplinaController::buscar(QString const &cod){
     disciplina = nullptr;
     disciplina = dao.buscar(new Disciplina(cod, ""));
     if (disciplina!=nullptr)
-        return disciplina->toQString();
+        return disciplina->toString();
     else
         throw QString("Disciplina não existente!");
 }

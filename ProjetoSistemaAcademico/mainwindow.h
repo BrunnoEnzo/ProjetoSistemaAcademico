@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "alunocontroller.h"
 #include "disciplinacontroller.h"
+#include "turmacontroller.h"
+#include "matriculacontroller.h"
 #include <QMessageBox>
 #include <QString>
 #include <QMessageBox>
@@ -37,9 +39,20 @@ private slots:
 
     void on_pushButtonRemoverDisciplina_clicked();
 
+    void on_pushButtonIncluirTurma_clicked();
+
+    void on_pushButtonConsultarTurma_clicked();
+
+    void on_pushButtonAtualizarTurma_clicked();
+
+    void on_pushButtonRemoverTurma_clicked();
+
 private:
     Ui::MainWindow *ui;
     AlunoController controleAluno;
     DisciplinaController controleDisciplina;
+    TurmaController controleTurma;
+    MatriculaController controleMatricula;
+
 };
 #endif // MAINWINDOW_H

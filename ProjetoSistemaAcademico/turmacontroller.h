@@ -8,11 +8,11 @@ class TurmaController
 {
 public:
     TurmaController();
-    bool analisarTurma(QString cod_disci,QString &cod_turma,int sub_turma);
-    void incluir(QString cod_disci,QString &cod_turma,int sub_turma,int maxAlunos,int numAlunos);
-    QString buscar(QString cod_disci,QString &cod_turma,int sub_turma);
-    void alterar(QString cod_disci,QString &cod_turma,int sub_turma,int maxAlunos,int numAlunos);
-    void deletar(QString cod_disci,QString &cod_turma,int sub_turma);
+    bool analisarTurma(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
+    void incluir(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int const &maxAlunos,int const &numAlunos);
+    QString buscar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
+    void alterar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int  const &maxAlunos,int const &numAlunos);
+    void deletar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
 private:
     Turma* turma;
     TurmaDAO dao;

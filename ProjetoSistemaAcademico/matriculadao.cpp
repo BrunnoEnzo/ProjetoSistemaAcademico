@@ -2,12 +2,22 @@
 
 MatriculaDAO::MatriculaDAO()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\SistAcad\\SistAcad\\academico.db";
-    db.setDatabaseName(nomeBD);
+//    if (QSqlDatabase::contains("QSQLITE")) {
+//        db = QSqlDatabase::database("QSQLITE");
+//        db.close();
+//    }
+
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\ProjetoSistemaAcademico\\academico.db";
+//    db.setDatabaseName(nomeBD);
 }
 void MatriculaDAO::incluir(Matricula* obj){
-    if (!db.open()) {
+//    if (!db.open()) {
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
+    DatabaseManager databaseManager;
+
+    if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
     QSqlQuery insertQuery;
@@ -24,15 +34,22 @@ void MatriculaDAO::incluir(Matricula* obj){
     insertQuery.bindValue(":media", obj->getNotaf());
 
     if (!insertQuery.exec()) {
-        db.close();
+        //db.close();
+        databaseManager.close();
         throw QString("Erro ao executar a inserção");
     }
 
-    db.close();
+    //db.close();
+    databaseManager.close();
 }
 Matricula* MatriculaDAO::buscar(Matricula* obj){
-    if(!db.open()){
-        throw QString("erro ao abrir o banco de dados");
+//    if(!db.open()){
+//        throw QString("erro ao abrir o banco de dados");
+//    }
+    DatabaseManager databaseManager;
+
+    if (!databaseManager.open()) {
+        throw QString("Erro ao abrir o banco de dados");
     }
     int ano_matricula=0,semestre=0;
     float nota1=0,nota2=0;
@@ -44,7 +61,8 @@ Matricula* MatriculaDAO::buscar(Matricula* obj){
         query.bindValue(":nota1",obj->getNota1());
         query.bindValue(":nota2",obj->getNota2());
         if(!query.exec()){
-            db.close();
+            //db.close();
+            databaseManager.close();
             throw QString("Erro ao executar a consulta");
         }
         while(query.next()){
@@ -59,7 +77,8 @@ Matricula* MatriculaDAO::buscar(Matricula* obj){
         obj->setNota1(nota1);
         obj->setNota2(nota2);
 
-        db.close();
+        //db.close();
+        databaseManager.close();
     }
 }
 void MatriculaDAO::alterar (Matricula* obj){
@@ -76,18 +95,25 @@ void MatriculaDAO::alterar (Matricula* obj){
         throw QString("Matricula não encontrada");
     }
     else{
-        if(!db.open()){
-            throw QString("Erro ao abrir banco de dados");
+//        if(!db.open()){
+//            throw QString("Erro ao abrir banco de dados");
+//        }
+        DatabaseManager databaseManager;
+
+        if (!databaseManager.open()) {
+            throw QString("Erro ao abrir o banco de dados");
         }
         QSqlQuery query;
         query.prepare("UPDATE disciplina SET mat_aluno = :mat_aluno WHERE cod_turma = :cod_turma ");
         query.bindValue(":cod", obj->getNome_disciplina());
         query.bindValue(":mat", obj->getCod_disciplina());
         if (!query.exec()){
-            db.close();
+            //db.close();
+            databaseManager.close();
             throw QString("Erro ao executar a update");
         }
-        db.close();
+        //db.close();
+        databaseManager.close();
         delete obj;
     }
 }

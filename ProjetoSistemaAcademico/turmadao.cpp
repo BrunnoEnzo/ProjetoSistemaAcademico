@@ -2,12 +2,23 @@
 
 TurmaDAO::TurmaDAO()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\SistAcad\\SistAcad\\academico.db";
-    db.setDatabaseName(nomeBD);
+//    if (QSqlDatabase::contains("QSQLITE")) {
+//        db = QSqlDatabase::database("QSQLITE");
+//        db.close();
+//    }
+
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\ProjetoSistemaAcademico\\academico.db";
+//    db.setDatabaseName(nomeBD);
 }
 void TurmaDAO::incluir(Turma* obj) {
-    if (!db.open()) {
+//    if (!db.open()) {
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
+
+    DatabaseManager databaseManager;
+
+    if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
     QSqlQuery insertQuery;
@@ -20,18 +31,23 @@ void TurmaDAO::incluir(Turma* obj) {
     insertQuery.bindValue(":num_alunos", obj->getNumAlunos());
 
     if (!insertQuery.exec()) {
-        db.close();
+        //db.close();
+        databaseManager.close();
         throw QString("Erro ao executar a inserção");
     }
-
-    db.close();
+    databaseManager.close();
+    //db.close();
 }
 
 Turma* TurmaDAO::buscar(Turma* obj) {
-    if (!db.open()) {
+//    if (!db.open()) {
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
+    DatabaseManager databaseManager;
+
+    if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
-
     QString cod_disciplina(""), cod_turma(""), sub_turma("");
     int max_alunos = 0, num_alunos = 0;
 
@@ -42,7 +58,8 @@ Turma* TurmaDAO::buscar(Turma* obj) {
         query.bindValue(":cod_disciplina", obj->getCod_disciplina());
         query.bindValue(":sub_turma", obj->getSub_turma());
         if (!query.exec()) {
-            db.close();
+            //db.close();
+
             throw QString("Erro ao executar a consulta");
         }
 
@@ -59,7 +76,8 @@ Turma* TurmaDAO::buscar(Turma* obj) {
         obj->setMaxAlunos(max_alunos);
         obj->setNumAlunos(num_alunos);
 
-        db.close();
+        //db.close();
+        databaseManager.close();
     }
 
     if (obj->getCod_turma() != "")
@@ -72,6 +90,8 @@ Turma* TurmaDAO::buscar(Turma* obj) {
 
 
 void TurmaDAO::alterar(Turma* obj){
+
 }
 Turma* TurmaDAO::remover(Turma* obj){
+
 }

@@ -13,6 +13,7 @@ SOURCES += \
     alunocontroller.cpp \
     alunodao.cpp \
     dao.cpp \
+    databasemanager.cpp \
     disciplina.cpp \
     disciplinacontroller.cpp \
     disciplinadao.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     alunocontroller.h \
     alunodao.h \
     dao.h \
+    databasemanager.h \
     disciplina.h \
     disciplinacontroller.h \
     disciplinadao.h \

@@ -2,13 +2,22 @@
 
 DisciplinaDAO::DisciplinaDAO()
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\SistAcad\\SistAcad\\academico.db";
-    db.setDatabaseName(nomeBD);
+//    if (QSqlDatabase::contains("QSQLITE")) {
+//        db = QSqlDatabase::database("QSQLITE");
+//        db.close();
+//    }
+//    db = QSqlDatabase::addDatabase("QSQLITE");
+//    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\ProjetoSistemaAcademico\\academico.db";
+//    db.setDatabaseName(nomeBD);
 }
 
 void DisciplinaDAO::incluir(Disciplina* obj){
-    if (!db.open()){
+//    if (!db.open()){
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
+    DatabaseManager databaseManager;
+
+    if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
     QSqlQuery query;
@@ -16,14 +25,21 @@ void DisciplinaDAO::incluir(Disciplina* obj){
     query.bindValue(":cod", obj->getCod_disciplina());
     query.bindValue(":nom", obj->getNome_disciplina());
     if (!query.exec()){
-        db.close();
+        //db.close();
+        databaseManager.close();
         throw QString("Erro ao executar a inserção");
     }
-    db.close();
+    //db.close();
+    databaseManager.close();
 }
 
 Disciplina* DisciplinaDAO::buscar(Disciplina* obj){
-    if (!db.open()){
+//    if (!db.open()){
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
+    DatabaseManager databaseManager;
+
+    if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
     QString codigo(""), nome("");
@@ -32,7 +48,8 @@ Disciplina* DisciplinaDAO::buscar(Disciplina* obj){
         query.prepare("SELECT * FROM disciplina WHERE cod_disciplina = :cod;");
         query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
-            db.close();
+            //db.close();
+            databaseManager.close();
             throw QString("Erro ao executar a consulta");
         }
         while (query.next()){
@@ -41,7 +58,8 @@ Disciplina* DisciplinaDAO::buscar(Disciplina* obj){
         }
         obj->setCod_disciplina(codigo);
         obj->setNome_disciplina(nome);
-        db.close();
+        //db.close();
+        databaseManager.close();
     }
     if (obj->getCod_disciplina()!="")
         return obj;
@@ -58,7 +76,12 @@ void DisciplinaDAO::alterar(Disciplina* obj){
         throw QString("Aluno não encontrado!");
     }
     else{
-        if (!db.open()){
+//        if (!db.open()){
+//            throw QString("Erro ao abrir o banco de dados");
+//        }
+        DatabaseManager databaseManager;
+
+        if (!databaseManager.open()) {
             throw QString("Erro ao abrir o banco de dados");
         }
         QSqlQuery query;
@@ -66,10 +89,12 @@ void DisciplinaDAO::alterar(Disciplina* obj){
         query.bindValue(":nom", obj->getNome_disciplina());
         query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
-            db.close();
+            //db.close();
+            databaseManager.close();
             throw QString("Erro ao executar a update");
         }
-        db.close();
+        //db.close();
+        databaseManager.close();
         delete obj;
     }
 }
@@ -81,17 +106,24 @@ Disciplina* DisciplinaDAO::remover(Disciplina* obj){
         throw QString("Aluno não encontrado!");
     }
     else{
-        if (!db.open()){
+//        if (!db.open()){
+//            throw QString("Erro ao abrir o banco de dados");
+//        }
+        DatabaseManager databaseManager;
+
+        if (!databaseManager.open()) {
             throw QString("Erro ao abrir o banco de dados");
         }
         QSqlQuery query;
         query.prepare("DELETE FROM disciplina WHERE cod_disciplina = :cod ;");
         query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
-            db.close();
+            //db.close();
+            databaseManager.close();
             throw QString("Erro ao executar a delete");
         }
-        db.close();
+        //db.close();
+        databaseManager.close();
         delete obj;
     }
 }

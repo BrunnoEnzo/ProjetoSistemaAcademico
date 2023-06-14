@@ -135,3 +135,28 @@ void MainWindow::on_pushButtonRemoverDisciplina_clicked()
     }
 }
 
+
+//Turma
+void MainWindow::on_pushButtonIncluirTurma_clicked()
+{
+
+}
+
+
+void MainWindow::on_pushButtonConsultarTurma_clicked()
+{
+
+}
+
+
+void MainWindow::on_pushButtonAtualizarTurma_clicked()
+{
+
+}
+
+
+void MainWindow::on_pushButtonRemoverTurma_clicked()
+{
+
+}
+

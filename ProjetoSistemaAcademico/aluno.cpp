@@ -5,14 +5,14 @@ Aluno::Aluno()
 
 }
 
+Aluno::Aluno(QString mat){
+    matricula = mat;
+}
 Aluno::Aluno(QString mat, QString nom){
     matricula = mat;
     nome = nom;
 }
 
-Aluno::Aluno(QString mat){
-    matricula = mat;
-}
 
 QString Aluno::getMatricula() const
 {
@@ -34,6 +34,6 @@ void Aluno::setNome(const QString &newNome)
     nome = newNome;
 }
 
-QString Aluno::toQString()const{
+QString Aluno::toString()const{
     return matricula + ";" + nome;
 }

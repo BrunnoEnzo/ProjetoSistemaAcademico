@@ -1,8 +1,9 @@
 #ifndef MATRICULADAO_H
 #define MATRICULADAO_H
 
-#include <dao.h>
-#include <matricula.h>
+#include "dao.h"
+#include "matricula.h"
+#include "databasemanager.h"
 #include <QString>
 #include <string>
 #include <QtSql>

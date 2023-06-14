@@ -18,7 +18,7 @@ QString AlunoController::buscar(QString const &cod){
     aluno = nullptr;
     aluno = dao.buscar(new Aluno(cod, ""));
     if (aluno!=nullptr)
-        return aluno->toQString();
+        return aluno->toString();
     else
         throw QString("Aluno não encontrado!");
 }

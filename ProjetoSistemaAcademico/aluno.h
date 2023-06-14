@@ -15,7 +15,7 @@ public:
     QString getNome() const;
     void setNome(const QString &newNome);
 
-    QString toQString()const;
+    QString toString() const;
 
 private:
     QString matricula;

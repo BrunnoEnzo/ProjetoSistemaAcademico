@@ -16,7 +16,7 @@ public:
     void setCod_disciplina(const QString &newCod_disciplina);
     const QString &getNome_disciplina() const;
     void setNome_disciplina(const QString &newNome_disciplina);
-    QString toQString()const;
+    QString toString()const;
 };
 
 #endif // DISCIPLINA_H
