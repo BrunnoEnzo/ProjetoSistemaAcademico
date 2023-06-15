@@ -12,7 +12,7 @@ public:
     void incluir(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int const &maxAlunos,int const &numAlunos);
     QString buscar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
     void alterar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int  const &maxAlunos,int const &numAlunos);
-    void deletar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
+    void remover(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
 private:
     Turma* turma;
     TurmaDAO dao;

@@ -1,6 +1,5 @@
 #include "turmacontroller.h"
 #include <QString>
-#include "disciplinacontroller.h"
 TurmaController::TurmaController()
 {
 
@@ -15,10 +14,6 @@ bool TurmaController::analisarTurma(QString const &cod_disci,QString const &cod_
 }
 
 void TurmaController::incluir(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int const &maxAlunos,int const &numAlunos){
-    turma = new Turma();
-    DisciplinaController disciplinaController;
-    if(analisarTurma(cod_disci,cod_turma,sub_turma)) throw QString("Esta turma já está cadastrada!");
-    if(!disciplinaController.analisarDisciplina(cod_disci)) throw QString("Este código de disciplina não existe!");
     turma->setCod_disciplina(cod_disci);
     turma->setCod_turma(cod_turma);
     turma->setSub_turma(sub_turma);
@@ -38,15 +33,9 @@ QString TurmaController::buscar(QString const &cod_disci,QString const &cod_turm
 }
 
 void TurmaController::alterar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int const &maxAlunos,int const &numAlunos){
-    if(analisarTurma(cod_disci,cod_turma,sub_turma))
-        dao.alterar(new Turma(cod_disci,cod_turma,sub_turma,maxAlunos,numAlunos));
-    else
-        throw QString("Turma não existente!");
+    dao.alterar(new Turma(cod_disci,cod_turma,sub_turma,maxAlunos,numAlunos));
 }
 
-void TurmaController::deletar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
-    if(analisarTurma(cod_disci,cod_turma,sub_turma))
-        dao.remover(new Turma(cod_disci,cod_turma,sub_turma));
-    else
-        throw QString("Turma não existente!");
+void TurmaController::remover(QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
+    dao.remover(new Turma(cod_disci,cod_turma,sub_turma));
 }

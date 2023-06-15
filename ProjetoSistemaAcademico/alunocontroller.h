@@ -8,6 +8,7 @@ class AlunoController
 {
 public:
     AlunoController();
+    bool  analisarAluno(QString const &mat);
     void incluir(QString const &mat, QString const &nom);
     QString buscar(QString const &mat);
     void alterar(QString const &mat, QString const &nom);

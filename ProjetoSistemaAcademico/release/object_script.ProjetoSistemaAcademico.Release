@@ -2,6 +2,7 @@ release/aluno.o
 release/alunocontroller.o
 release/alunodao.o
 release/dao.o
+release/databasemanager.o
 release/disciplina.o
 release/disciplinacontroller.o
 release/disciplinadao.o

@@ -90,8 +90,59 @@ Turma* TurmaDAO::buscar(Turma* obj) {
 
 
 void TurmaDAO::alterar(Turma* obj){
+    Turma* turma = new Turma();
+    turma->setCod_disciplina(obj->getCod_disciplina());
+    turma->setCod_turma(obj->getCod_turma());
+    turma->setSub_turma(obj->getSub_turma());
+    turma->setMaxAlunos(obj->getMaxAlunos());
+    turma->setNumAlunos(obj->getNumAlunos());
+    if (this->buscar(turma) == nullptr) {
+        throw QString("Turma não encontrada");
+    } else {
+        DatabaseManager databaseManager;
 
+        if (!databaseManager.open()) {
+            throw QString("Erro ao abrir o banco de dados");
+        }
+
+        QSqlQuery query;
+        query.prepare("UPDATE turma SET cod_disciplina = :cod_disciplina, cod_turma = :cod_turma, sub_turma = :sub_turma, max_alunos = :max_alunos, num_alunos = :num_alunos WHERE cod_turma = :cod_turma");
+
+        query.bindValue(":cod_disciplina", turma->getCod_disciplina());
+        query.bindValue(":cod_turma", turma->getCod_turma());
+        query.bindValue(":sub_turma", turma->getSub_turma());
+        query.bindValue(":max_alunos", turma->getMaxAlunos());
+        query.bindValue(":num_alunos", turma->getNumAlunos());
+        if (!query.exec()) {
+            databaseManager.close();
+            throw QString("Erro ao executar o update");
+        }
+        databaseManager.close();
+        delete obj;
+    }
 }
 Turma* TurmaDAO::remover(Turma* obj){
-
+    Turma* turma = new Turma();
+    turma->setCod_disciplina(obj->getCod_disciplina());
+    turma->setCod_turma(obj->getCod_turma());
+    turma->setSub_turma(obj->getSub_turma());
+    if (this->buscar(turma) == nullptr) {
+        throw QString("Turma não encontrada!");
+    } else {
+        DatabaseManager databaseManager;
+        if (!databaseManager.open()) {
+            throw QString("Erro ao abrir o banco de dados");
+        }
+        QSqlQuery query;
+        query.prepare("DELETE FROM turma WHERE cod_disciplina = :cod_disciplina AND cod_turma = :cod_turma AND sub_turma = :sub_turma;");
+        query.bindValue(":cod_disciplina", turma->getCod_disciplina());
+        query.bindValue(":cod_turma", turma->getCod_turma());
+        query.bindValue(":sub_turma", turma->getSub_turma());
+        if (!query.exec()) {
+            databaseManager.close();
+            throw QString("Erro ao executar o delete");
+        }
+        databaseManager.close();
+        delete obj;
+    }
 }

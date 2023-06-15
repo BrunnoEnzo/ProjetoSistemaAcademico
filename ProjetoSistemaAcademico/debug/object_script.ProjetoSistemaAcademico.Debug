@@ -2,6 +2,7 @@ debug/aluno.o
 debug/alunocontroller.o
 debug/alunodao.o
 debug/dao.o
+debug/databasemanager.o
 debug/disciplina.o
 debug/disciplinacontroller.o
 debug/disciplinadao.o

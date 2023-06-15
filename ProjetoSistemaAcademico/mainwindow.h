@@ -47,6 +47,14 @@ private slots:
 
     void on_pushButtonRemoverTurma_clicked();
 
+    void on_pushButtonIncluirMatricula_clicked();
+
+    void on_pushButtonConsultarMatricula_clicked();
+
+    void on_pushButtonAtualizarMatricula_clicked();
+
+    void on_pushButtonRemoverMatricula_clicked();
+
 private:
     Ui::MainWindow *ui;
     AlunoController controleAluno;

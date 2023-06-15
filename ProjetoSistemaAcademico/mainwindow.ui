@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Aluno">
      <attribute name="title">
@@ -307,7 +307,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditMatricula_11"/>
+        <widget class="QLineEdit" name="lineEditSemestreMatricula"/>
        </item>
       </layout>
      </widget>
@@ -650,7 +650,7 @@
      <x>0</x>
      <y>0</y>
      <width>559</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

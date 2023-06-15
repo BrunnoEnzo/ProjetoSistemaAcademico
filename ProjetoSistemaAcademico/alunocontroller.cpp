@@ -6,6 +6,15 @@ AlunoController::AlunoController()
 
 }
 
+bool  AlunoController::analisarAluno(QString const &mat){
+    aluno = nullptr;
+    aluno = dao.buscar(new Aluno(mat,""));
+    if(aluno != nullptr){
+        return true;
+    }
+    return false;
+}
+
 void AlunoController::incluir(QString const &cod, QString const &nom){
     aluno = new Aluno();
     aluno->setMatricula(cod);

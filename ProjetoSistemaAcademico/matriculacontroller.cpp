@@ -17,7 +17,7 @@ void MatriculaController::incluir(QString const &mat, QString const &cod_disci,Q
 int const &ano,int const &semestre,float const &nota1,float const &nota2,float const &notaf){
     matricula = new Matricula(mat,cod_turma,sub_turma,cod_disci,ano,semestre,nota1,nota2,notaf);
     if(analisarMatricula(mat,cod_disci,cod_turma,sub_turma))
-        throw QString("Disciplina já existente");
+        throw QString("Matricula já existente");
             else{
             matricula->setMatricula(mat);
             matricula->setCod_disciplina(cod_disci);
@@ -39,20 +39,20 @@ QString MatriculaController::buscar(QString const &mat, QString const &cod_disci
     if (matricula!=nullptr)
         return matricula->toString();
     else
-        throw QString("Disciplina não existente!");
+        throw QString("Matricula não existente!");
 }
 
 void MatriculaController::alterar(QString const &mat, QString const &cod_disci,QString const &cod_turma,int const &sub_turma,
 int const &ano,int const &semestre,float const &nota1,float const &nota2,float const &notaf){
     if(analisarMatricula(mat,cod_disci,cod_turma,sub_turma))
-        dao.alterar(new Matricula(mat,cod_turma,sub_turma,cod_disci,ano,semestre,nota1,nota2,(nota1+nota2)/2));
+        dao.alterar(new Matricula(mat,cod_turma,sub_turma,cod_disci,ano,semestre,nota1,nota2,notaf));
     else
-        throw QString("Disciplina não existente!");
+        throw QString("Matricula não existente!");
 }
 
 void MatriculaController::remover(QString const &mat, QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
     if(analisarMatricula(mat,cod_disci,cod_turma,sub_turma))
         dao.remover(new Matricula(mat,cod_turma,sub_turma,cod_disci));
     else
-        throw QString("Disciplina não existente!");
+        throw QString("Matricula não existente!");
 }
