@@ -20,7 +20,6 @@ void TurmaController::incluir(QString const &cod_disci,QString const &cod_turma,
     turma->setMaxAlunos(maxAlunos);
     turma->setNumAlunos(numAlunos);
     dao.incluir(turma);
-
 }
 
 QString TurmaController::buscar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma){

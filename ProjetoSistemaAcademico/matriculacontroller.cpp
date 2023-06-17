@@ -15,22 +15,17 @@ bool  MatriculaController::analisarMatricula(QString const &mat, QString const &
 
 void MatriculaController::incluir(QString const &mat, QString const &cod_disci,QString const &cod_turma,int const &sub_turma,
 int const &ano,int const &semestre,float const &nota1,float const &nota2,float const &notaf){
-    matricula = new Matricula(mat,cod_turma,sub_turma,cod_disci,ano,semestre,nota1,nota2,notaf);
-    if(analisarMatricula(mat,cod_disci,cod_turma,sub_turma))
-        throw QString("Matricula já existente");
-            else{
-            matricula->setMatricula(mat);
-            matricula->setCod_disciplina(cod_disci);
-            matricula->setCod_turma(cod_turma);
-            matricula->setSub_turma(sub_turma);
-            matricula->setAno(ano);
-            matricula->setSemestre(semestre);
-            matricula->setNota1(nota1);
-            matricula->setNota2(nota2);
-            matricula->setNotaf((nota1+nota2)/2);
-            dao.incluir(matricula);
-        }
-    matricula = nullptr;
+    matricula = new Matricula(mat,cod_turma,sub_turma,cod_disci,ano,semestre,nota1,nota2,notaf);   
+    matricula->setMatricula(mat);
+    matricula->setCod_disciplina(cod_disci);
+    matricula->setCod_turma(cod_turma);
+    matricula->setSub_turma(sub_turma);
+    matricula->setAno(ano);
+    matricula->setSemestre(semestre);
+    matricula->setNota1(nota1);
+    matricula->setNota2(nota2);
+    matricula->setNotaf((nota1+nota2)/2);
+    dao.incluir(matricula);
 }
 
 QString MatriculaController::buscar(QString const &mat, QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
