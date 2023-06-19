@@ -200,7 +200,6 @@ void MainWindow::on_pushButtonConsultarTurma_clicked()//Consultar Turma
 
 void MainWindow::on_pushButtonAtualizarTurma_clicked()//Atualizar Turma
 {
-
     try{
         if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),ui->lineEditSubTurma->text().toInt())){
             controleTurma.alterar(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
@@ -229,6 +228,8 @@ void MainWindow::on_pushButtonRemoverTurma_clicked()//Remover Turma
             ui->lineEditCodDisciplinaTurma->clear();
             ui->lineEditCodigoTurma->clear();
             ui->lineEditSubTurma->clear();
+            ui->lineEditMaximoTurma->clear();
+            ui->lineEditNumeroTurma->clear();
             ui->lineEditCodDisciplinaTurma->setFocus();
         }
         else{
@@ -244,11 +245,11 @@ void MainWindow::on_pushButtonRemoverTurma_clicked()//Remover Turma
 void MainWindow::on_pushButtonIncluirMatricula_clicked()//Incluir Matricula
 {
     try{
-        if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
+        if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
             if(controleAluno.analisarAluno(ui->lineEditMatricula->text())){
-                if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
+                if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
                     float notaf=(ui->lineEditNota1Matricula->text().toFloat()+ui->lineEditNota2Matricula->text().toFloat())/2;
-                    controleMatricula.incluir(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
+                    controleMatricula.incluir(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
                     ui->lineEditAnoMatricula->text().toInt(),ui->lineEditSemestreMatricula->text().toInt(),ui->lineEditNota1Matricula->text().toFloat(),ui->lineEditNota2Matricula->text().toFloat(),notaf);
                     QMessageBox::information(this, "Ok", "Matricula incluída com sucesso!");
                     ui->lineEditMatricula->clear();
@@ -279,11 +280,11 @@ void MainWindow::on_pushButtonIncluirMatricula_clicked()//Incluir Matricula
 }
 
 
-void MainWindow::on_pushButtonConsultarMatricula_clicked()//Incluir Matricula
+void MainWindow::on_pushButtonConsultarMatricula_clicked()//Consultar Matricula
 {
-    QString info = controleMatricula.buscar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),
-    ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt());
     try{
+        QString info = controleMatricula.buscar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),
+        ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt());
         QStringList Info = info.split(";");
         ui->lineEditAnoMatricula->setText(Info[0]);
         ui->lineEditSemestreMatricula->setText(Info[1]);
@@ -301,12 +302,49 @@ void MainWindow::on_pushButtonConsultarMatricula_clicked()//Incluir Matricula
 
 void MainWindow::on_pushButtonAtualizarMatricula_clicked()//Atualizar Matricula
 {
-
+    try{
+        if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
+            float notaf=(ui->lineEditNota1Matricula->text().toFloat()+ui->lineEditNota2Matricula->text().toFloat())/2;
+            controleMatricula.alterar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
+            ui->lineEditAnoMatricula->text().toInt(),ui->lineEditSemestreMatricula->text().toInt(),ui->lineEditNota1Matricula->text().toFloat(),ui->lineEditNota2Matricula->text().toFloat(),notaf);
+            QMessageBox::information(this, "Ok", "Matricula alterado com sucesso!");
+            ui->lineEditMatricula->setFocus();
+            ui->lineEditMatricula->selectAll();
+        }
+        else{
+            throw QString("Matricula não existente!");
+        }
+    }
+    catch(QString &msg){
+        QMessageBox::information(this, "Erro", msg);
+    }
 }
 
 
-void MainWindow::on_pushButtonRemoverMatricula_clicked()//Atualizar Matricula
+void MainWindow::on_pushButtonRemoverMatricula_clicked()//Remover Matricula
 {
+    try{
+        if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
+            controleMatricula.remover(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt());
+            QMessageBox::information(this, "Ok", "Disciplina removido com sucesso!");
+            ui->lineEditMatricula->clear();
+            ui->lineEditCodDisciplinaMatricula->clear();
+            ui->lineEditCodTurmaMatricula->clear();
+            ui->lineEditSubTurmaMatricula->clear();
+            ui->lineEditAnoMatricula->clear();
+            ui->lineEditSemestreMatricula->clear();
+            ui->lineEditNota1Matricula->clear();
+            ui->lineEditNota2Matricula->clear();
+            ui->lineEditNotaFinal->clear();
 
+            ui->lineEditMatricula->setFocus();
+        }
+        else{
+            throw QString("Turma não existente!");
+        }
+    }
+    catch(QString &msg){
+        QMessageBox::information(this, "Erro", msg);
+    }
 }
 
