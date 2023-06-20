@@ -8,7 +8,7 @@ DatabaseManager::DatabaseManager()
     }
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    nomeBD = "C:/Users/GUARDIAN/Downloads/ProjetoSistemaAcademico/academico.db";
+    nomeBD = "C:/Users/dpsil/Downloads/ProjetoSistemaAcademico/academico.db";
     db.setDatabaseName(nomeBD);
 }
 

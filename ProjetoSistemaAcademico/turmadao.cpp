@@ -12,6 +12,10 @@ TurmaDAO::TurmaDAO()
 //    db.setDatabaseName(nomeBD);
 }
 void TurmaDAO::incluir(Turma* obj) {
+//    if (!db.open()) {
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
+
     DatabaseManager databaseManager;
 
     if (!databaseManager.open()) {
@@ -27,19 +31,24 @@ void TurmaDAO::incluir(Turma* obj) {
     insertQuery.bindValue(":num_alunos", obj->getNumAlunos());
 
     if (!insertQuery.exec()) {
+        //db.close();
         databaseManager.close();
         throw QString("Erro ao executar a inserção");
     }
     databaseManager.close();
+    //db.close();
 }
 
 Turma* TurmaDAO::buscar(Turma* obj) {
+//    if (!db.open()) {
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
     DatabaseManager databaseManager;
 
     if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
-    QString cod_disciplina(""), cod_turma(""), sub_turma("");
+    QString cod_disciplina(""), cod_turma(""),sub_turma("");
     int max_alunos = 0, num_alunos = 0;
 
     QSqlQuery query;
@@ -49,6 +58,8 @@ Turma* TurmaDAO::buscar(Turma* obj) {
         query.bindValue(":cod_disciplina", obj->getCod_disciplina());
         query.bindValue(":sub_turma", obj->getSub_turma());
         if (!query.exec()) {
+            //db.close();
+
             throw QString("Erro ao executar a consulta");
         }
 
@@ -65,10 +76,10 @@ Turma* TurmaDAO::buscar(Turma* obj) {
         obj->setMaxAlunos(max_alunos);
         obj->setNumAlunos(num_alunos);
 
+        //db.close();
         databaseManager.close();
     }
-
-    if (obj->getCod_disciplina() != "")
+    if (obj->getCod_turma() != "")
         return obj;
     else {
         delete obj;
@@ -82,6 +93,8 @@ void TurmaDAO::alterar(Turma* obj){
     turma->setCod_disciplina(obj->getCod_disciplina());
     turma->setCod_turma(obj->getCod_turma());
     turma->setSub_turma(obj->getSub_turma());
+    turma->setMaxAlunos(obj->getMaxAlunos());
+    turma->setNumAlunos(obj->getNumAlunos());
     if (this->buscar(turma) == nullptr) {
         throw QString("Turma não encontrada");
     } else {
@@ -92,13 +105,13 @@ void TurmaDAO::alterar(Turma* obj){
         }
 
         QSqlQuery query;
-        query.prepare("UPDATE turma SET  max_alunos = :max_alunos, num_alunos = :num_alunos WHERE cod_turma = :cod_turma AND sub_turma = :sub_turma AND cod_disciplina = :cod_disciplina ;");
+        query.prepare("UPDATE turma SET cod_disciplina = :cod_disciplina, cod_turma = :cod_turma, sub_turma = :sub_turma, max_alunos = :max_alunos, num_alunos = :num_alunos WHERE cod_disciplina = :cod_disciplina AND cod_turma = :cod_turma AND sub_turma = :sub_turma");
 
-        query.bindValue(":max_alunos", turma->getMaxAlunos());
-        query.bindValue(":num_alunos", turma->getNumAlunos());
+        query.bindValue(":cod_disciplina", turma->getCod_disciplina());
         query.bindValue(":cod_turma", turma->getCod_turma());
         query.bindValue(":sub_turma", turma->getSub_turma());
-        query.bindValue(":cod_disciplina", turma->getCod_disciplina());
+        query.bindValue(":max_alunos", turma->getMaxAlunos());
+        query.bindValue(":num_alunos", turma->getNumAlunos());
         if (!query.exec()) {
             databaseManager.close();
             throw QString("Erro ao executar o update");
@@ -107,6 +120,7 @@ void TurmaDAO::alterar(Turma* obj){
         delete obj;
     }
 }
+
 Turma* TurmaDAO::remover(Turma* obj){
     Turma* turma = new Turma();
     turma->setCod_disciplina(obj->getCod_disciplina());
@@ -120,7 +134,7 @@ Turma* TurmaDAO::remover(Turma* obj){
             throw QString("Erro ao abrir o banco de dados");
         }
         QSqlQuery query;
-        query.prepare("DELETE FROM turma WHERE cod_disciplina = :cod_disciplina AND cod_turma = :cod_turma AND sub_turma = :sub_turma ;");
+        query.prepare("DELETE FROM turma WHERE cod_disciplina = :cod_disciplina AND cod_turma = :cod_turma AND sub_turma = :sub_turma;");
         query.bindValue(":cod_disciplina", turma->getCod_disciplina());
         query.bindValue(":cod_turma", turma->getCod_turma());
         query.bindValue(":sub_turma", turma->getSub_turma());

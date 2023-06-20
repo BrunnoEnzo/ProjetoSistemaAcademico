@@ -12,6 +12,9 @@ DisciplinaDAO::DisciplinaDAO()
 }
 
 void DisciplinaDAO::incluir(Disciplina* obj){
+//    if (!db.open()){
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
     DatabaseManager databaseManager;
 
     if (!databaseManager.open()) {
@@ -22,13 +25,18 @@ void DisciplinaDAO::incluir(Disciplina* obj){
     query.bindValue(":cod", obj->getCod_disciplina());
     query.bindValue(":nom", obj->getNome_disciplina());
     if (!query.exec()){
+        //db.close();
         databaseManager.close();
         throw QString("Erro ao executar a inserção");
     }
+    //db.close();
     databaseManager.close();
 }
 
 Disciplina* DisciplinaDAO::buscar(Disciplina* obj){
+//    if (!db.open()){
+//        throw QString("Erro ao abrir o banco de dados");
+//    }
     DatabaseManager databaseManager;
 
     if (!databaseManager.open()) {
@@ -40,6 +48,7 @@ Disciplina* DisciplinaDAO::buscar(Disciplina* obj){
         query.prepare("SELECT * FROM disciplina WHERE cod_disciplina = :cod;");
         query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
+            //db.close();
             databaseManager.close();
             throw QString("Erro ao executar a consulta");
         }
@@ -49,6 +58,7 @@ Disciplina* DisciplinaDAO::buscar(Disciplina* obj){
         }
         obj->setCod_disciplina(codigo);
         obj->setNome_disciplina(nome);
+        //db.close();
         databaseManager.close();
     }
     if (obj->getCod_disciplina()!="")
@@ -66,6 +76,9 @@ void DisciplinaDAO::alterar(Disciplina* obj){
         throw QString("Aluno não encontrado!");
     }
     else{
+//        if (!db.open()){
+//            throw QString("Erro ao abrir o banco de dados");
+//        }
         DatabaseManager databaseManager;
 
         if (!databaseManager.open()) {
@@ -76,9 +89,11 @@ void DisciplinaDAO::alterar(Disciplina* obj){
         query.bindValue(":nom", obj->getNome_disciplina());
         query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
+            //db.close();
             databaseManager.close();
             throw QString("Erro ao executar a update");
         }
+        //db.close();
         databaseManager.close();
         delete obj;
     }
@@ -91,6 +106,9 @@ Disciplina* DisciplinaDAO::remover(Disciplina* obj){
         throw QString("Aluno não encontrado!");
     }
     else{
+//        if (!db.open()){
+//            throw QString("Erro ao abrir o banco de dados");
+//        }
         DatabaseManager databaseManager;
 
         if (!databaseManager.open()) {
@@ -100,9 +118,11 @@ Disciplina* DisciplinaDAO::remover(Disciplina* obj){
         query.prepare("DELETE FROM disciplina WHERE cod_disciplina = :cod ;");
         query.bindValue(":cod", obj->getCod_disciplina());
         if (!query.exec()){
+            //db.close();
             databaseManager.close();
             throw QString("Erro ao executar a delete");
         }
+        //db.close();
         databaseManager.close();
         delete obj;
     }

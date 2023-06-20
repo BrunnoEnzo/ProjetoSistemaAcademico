@@ -152,28 +152,82 @@ void MainWindow::on_pushButtonRemoverDisciplina_clicked()//Remover Disciplina
 
 
 //Turma
-void MainWindow::on_pushButtonIncluirTurma_clicked()//Incluir Turma
+void MainWindow::on_pushButtonIncluirTurma_clicked()
+{
+    try {
+
+        QString codDisciplina = ui->lineEditCodDisciplinaTurma->text();
+        QString codTurma = ui->lineEditCodigoTurma->text();
+        int subTurma = ui->lineEditSubTurma->text().toInt();
+        int maximoTurma = ui->lineEditMaximoTurma->text().toInt();
+        int numeroTurma = ui->lineEditNumeroTurma->text().toInt();
+        if(!controleDisciplina.analisarDisciplina(codDisciplina))
+            throw QString("Código de Disciplina não existente!");
+        if(controleTurma.analisarTurma(codDisciplina,codTurma,subTurma))
+            throw QString("Turma já exisitente");
+
+        controleTurma.incluir(codDisciplina, codTurma, subTurma, maximoTurma, numeroTurma);
+
+        QMessageBox::information(this, "Ok", "Turma incluída com sucesso!");
+        ui->lineEditCodDisciplinaTurma->clear();
+        ui->lineEditCodigoTurma->clear();
+        ui->lineEditSubTurma->clear();
+        ui->lineEditMaximoTurma->clear();
+        ui->lineEditNumeroTurma->clear();
+        ui->lineEditCodDisciplinaTurma->setFocus();
+    }
+    catch (QString &msg) {
+        QMessageBox::information(this, "ERRO", msg);
+    }
+}
+
+
+void MainWindow::on_pushButtonConsultarTurma_clicked()
 {
     try{
-        if(controleDisciplina.analisarDisciplina(ui->lineEditCodigoDisciplina->text())){
-            if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),ui->lineEditSubTurma->text().toInt())){
-                controleTurma.incluir(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
-                ui->lineEditSubTurma->text().toInt(),ui->lineEditMaximoTurma->text().toInt(),ui->lineEditNumeroTurma->text().toInt());
-                QMessageBox::information(this, "Ok", "Turma incluída com sucesso!");
-                ui->lineEditCodDisciplinaTurma->clear();
-                ui->lineEditCodigoTurma->clear();
-                ui->lineEditSubTurma->clear();
-                ui->lineEditMaximoTurma->clear();
-                ui->lineEditNumeroTurma->clear();
-                ui->lineEditCodDisciplinaTurma->setFocus();
-            }
-            else{
-                throw QString("Turma já existente");
-            }
+        QString codDisciplina = ui->lineEditCodDisciplinaTurma->text();
+        QString codTurma = ui->lineEditCodigoTurma->text();
+        int subTurma = ui->lineEditSubTurma->text().toInt();
+
+        if(!controleTurma.analisarTurma(codDisciplina,codTurma,subTurma)){
+            ui->lineEditCodDisciplinaTurma->clear();
+            ui->lineEditCodigoTurma->clear();
+            ui->lineEditSubTurma->clear();
+            throw QString("Turma não existente!");
         }
         else{
-            throw QString("Disciplina não cadastrada!");
+        QString info = controleTurma.buscar(codDisciplina,codTurma,subTurma);
+        QStringList Info = info.split(";");
+        ui->lineEditSubTurma->setText(Info[1]);
+        ui->lineEditMaximoTurma->setText(Info[2]);
+        ui->lineEditNumeroTurma->setText(Info[3]);
+        ui->lineEditCodDisciplinaTurma->setFocus();
         }
+    }
+    catch(QString &msg){
+        QMessageBox::information(this, "ERRO", msg);
+        ui->lineEditCodigoDisciplina->selectAll();
+    }
+}
+
+
+void MainWindow::on_pushButtonAtualizarTurma_clicked()
+{
+    try{
+        QString codDisciplina = ui->lineEditCodDisciplinaTurma->text();
+        QString codTurma = ui->lineEditCodigoTurma->text();
+        int subTurma = ui->lineEditSubTurma->text().toInt();
+        int maximoTurma = ui->lineEditMaximoTurma->text().toInt();
+        int numeroTurma = ui->lineEditNumeroTurma->text().toInt();
+
+        if(!controleTurma.analisarTurma(codDisciplina,codTurma,subTurma))
+            throw QString("Turma não existente!");
+
+        controleTurma.alterar(codDisciplina,codTurma,subTurma,maximoTurma,numeroTurma);
+
+        QMessageBox::information(this, "Ok", "Turma alterada com sucesso!");
+        ui->lineEditCodDisciplinaTurma->setFocus();
+        ui->lineEditCodDisciplinaTurma->selectAll();
     }
     catch(QString &msg){
         QMessageBox::information(this, "ERRO", msg);
@@ -181,76 +235,52 @@ void MainWindow::on_pushButtonIncluirTurma_clicked()//Incluir Turma
 }
 
 
-void MainWindow::on_pushButtonConsultarTurma_clicked()//Consultar Turma
+void MainWindow::on_pushButtonRemoverTurma_clicked()
 {
     try{
-        QString info = controleTurma.buscar(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
-        ui->lineEditSubTurma->text().toInt());
-        QStringList Info = info.split(";");
-        ui->lineEditMaximoTurma->setText(Info[2]);
-        ui->lineEditNumeroTurma->setText(Info[3]);
-        ui->lineEditCodDisciplinaTurma->setFocus();
-    }
-    catch(QString &msg){
-    QMessageBox::information(this, "ERRO", msg);
-    ui->lineEditCodigoDisciplina->selectAll();
-    }
-}
+        QString codDisciplina = ui->lineEditCodDisciplinaTurma->text();
+        QString codTurma = ui->lineEditCodigoTurma->text();
+        int subTurma = ui->lineEditSubTurma->text().toInt();
 
-
-void MainWindow::on_pushButtonAtualizarTurma_clicked()//Atualizar Turma
-{
-    try{
-        if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),ui->lineEditSubTurma->text().toInt())){
-            controleTurma.alterar(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
-            ui->lineEditSubTurma->text().toInt(),ui->lineEditMaximoTurma->text().toInt(),ui->lineEditNumeroTurma->text().toInt());
-            QMessageBox::information(this, "Ok", "Diciplina alterado com sucesso!");
-            ui->lineEditCodDisciplinaTurma->setFocus();
-            ui->lineEditCodDisciplinaTurma->selectAll();
-        }
-        else{
+        if(!controleTurma.analisarTurma(codDisciplina,codTurma,subTurma))
             throw QString("Turma não existente!");
-        }
-    }
-    catch(QString &msg){
-        QMessageBox::information(this, "Erro", msg);
-    }
-}
-
-
-void MainWindow::on_pushButtonRemoverTurma_clicked()//Remover Turma
-{
-    try{
-        if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),ui->lineEditSubTurma->text().toInt())){
-            controleTurma.remover(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
-            ui->lineEditSubTurma->text().toInt());
-            QMessageBox::information(this, "Ok", "Disciplina removido com sucesso!");
+        else{
+            controleTurma.remover(codDisciplina,codTurma,subTurma);
+            QMessageBox::information(this, "Ok", "Turma excluída com sucesso!");
             ui->lineEditCodDisciplinaTurma->clear();
             ui->lineEditCodigoTurma->clear();
             ui->lineEditSubTurma->clear();
-            ui->lineEditMaximoTurma->clear();
-            ui->lineEditNumeroTurma->clear();
             ui->lineEditCodDisciplinaTurma->setFocus();
-        }
-        else{
-            throw QString("Turma não existente!");
         }
     }
     catch(QString &msg){
-        QMessageBox::information(this, "Erro", msg);
+        QMessageBox::information(this, "ERRO", msg);
     }
+
 }
 
 //Matricula
-void MainWindow::on_pushButtonIncluirMatricula_clicked()//Incluir Matricula
+void MainWindow::on_pushButtonIncluirMatricula_clicked()
 {
-    try{
-        if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
-            if(controleAluno.analisarAluno(ui->lineEditMatricula->text())){
-                if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
-                    float notaf=(ui->lineEditNota1Matricula->text().toFloat()+ui->lineEditNota2Matricula->text().toFloat())/2;
-                    controleMatricula.incluir(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
-                    ui->lineEditAnoMatricula->text().toInt(),ui->lineEditSemestreMatricula->text().toInt(),ui->lineEditNota1Matricula->text().toFloat(),ui->lineEditNota2Matricula->text().toFloat(),notaf);
+    try {
+        QString codDisciplina = ui->lineEditCodDisciplinaTurma->text();
+        QString codTurma = ui->lineEditCodTurmaMatricula->text();
+        int subTurma = ui->lineEditSubTurmaMatricula->text().toInt();
+        QString matricula = ui->lineEditMatricula->text();
+        int anoMatricula = ui->lineEditAnoMatricula->text().toInt();
+        int semestreMatricula = ui->lineEditSemestreMatricula->text().toInt();
+        float nota1 = ui->lineEditNota1Matricula->text().toFloat();
+        float nota2 = ui->lineEditNota2Matricula->text().toFloat();
+
+        if(!controleMatricula.analisarMatricula(matricula, codDisciplina, codTurma, subTurma))
+        if (controleTurma.analisarTurma(codDisciplina, codTurma, subTurma)) {
+            if (controleAluno.analisarAluno(matricula)) {
+                if (controleMatricula.analisarMatricula(matricula, codDisciplina, codTurma, subTurma)) {
+                    float mediaFinal = (nota1 + nota2) / 2;
+
+                    controleMatricula.incluir(matricula, codDisciplina, codTurma, subTurma,
+                                              anoMatricula, semestreMatricula, nota1, nota2, mediaFinal);
+
                     QMessageBox::information(this, "Ok", "Matricula incluída com sucesso!");
                     ui->lineEditMatricula->clear();
                     ui->lineEditCodDisciplinaMatricula->clear();
@@ -261,30 +291,25 @@ void MainWindow::on_pushButtonIncluirMatricula_clicked()//Incluir Matricula
                     ui->lineEditNota1Matricula->clear();
                     ui->lineEditNota2Matricula->clear();
                     ui->lineEditMatricula->setFocus();
-                }
-                else{
+                } else {
                     throw QString("Matricula já existente");
                 }
+            } else {
+                throw QString("Aluno não cadastrado!");
             }
-            else{
-                throw QString("Aluno não cadastrada!");
-            }
-        }
-        else{
+        } else {
             throw QString("Turma não cadastrada!");
         }
-    }
-    catch(QString &msg){
+    } catch (QString& msg) {
         QMessageBox::information(this, "ERRO", msg);
     }
 }
 
-
-void MainWindow::on_pushButtonConsultarMatricula_clicked()//Consultar Matricula
+void MainWindow::on_pushButtonConsultarMatricula_clicked()//Incluir Matricula
 {
+    QString info = controleMatricula.buscar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),
+    ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt());
     try{
-        QString info = controleMatricula.buscar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),
-        ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt());
         QStringList Info = info.split(";");
         ui->lineEditAnoMatricula->setText(Info[0]);
         ui->lineEditSemestreMatricula->setText(Info[1]);
@@ -302,49 +327,12 @@ void MainWindow::on_pushButtonConsultarMatricula_clicked()//Consultar Matricula
 
 void MainWindow::on_pushButtonAtualizarMatricula_clicked()//Atualizar Matricula
 {
-    try{
-        if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
-            float notaf=(ui->lineEditNota1Matricula->text().toFloat()+ui->lineEditNota2Matricula->text().toFloat())/2;
-            controleMatricula.alterar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
-            ui->lineEditAnoMatricula->text().toInt(),ui->lineEditSemestreMatricula->text().toInt(),ui->lineEditNota1Matricula->text().toFloat(),ui->lineEditNota2Matricula->text().toFloat(),notaf);
-            QMessageBox::information(this, "Ok", "Matricula alterado com sucesso!");
-            ui->lineEditMatricula->setFocus();
-            ui->lineEditMatricula->selectAll();
-        }
-        else{
-            throw QString("Matricula não existente!");
-        }
-    }
-    catch(QString &msg){
-        QMessageBox::information(this, "Erro", msg);
-    }
+
 }
 
 
-void MainWindow::on_pushButtonRemoverMatricula_clicked()//Remover Matricula
+void MainWindow::on_pushButtonRemoverMatricula_clicked()//Atualizar Matricula
 {
-    try{
-        if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
-            controleMatricula.remover(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt());
-            QMessageBox::information(this, "Ok", "Disciplina removido com sucesso!");
-            ui->lineEditMatricula->clear();
-            ui->lineEditCodDisciplinaMatricula->clear();
-            ui->lineEditCodTurmaMatricula->clear();
-            ui->lineEditSubTurmaMatricula->clear();
-            ui->lineEditAnoMatricula->clear();
-            ui->lineEditSemestreMatricula->clear();
-            ui->lineEditNota1Matricula->clear();
-            ui->lineEditNota2Matricula->clear();
-            ui->lineEditNotaFinal->clear();
 
-            ui->lineEditMatricula->setFocus();
-        }
-        else{
-            throw QString("Turma não existente!");
-        }
-    }
-    catch(QString &msg){
-        QMessageBox::information(this, "Erro", msg);
-    }
 }
 
