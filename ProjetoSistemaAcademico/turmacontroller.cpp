@@ -8,13 +8,14 @@ TurmaController::TurmaController()
 bool TurmaController::analisarTurma(QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
     turma = nullptr;
     turma = dao.buscar(new Turma(cod_disci,cod_turma,sub_turma));
-    if(turma != nullptr)
+    if(turma != nullptr){
         return true;
-
+    }
     return false;
 }
 
 void TurmaController::incluir(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int const &maxAlunos,int const &numAlunos){
+    turma = new Turma();
     turma->setCod_disciplina(cod_disci);
     turma->setCod_turma(cod_turma);
     turma->setSub_turma(sub_turma);
@@ -25,7 +26,7 @@ void TurmaController::incluir(QString const &cod_disci,QString const &cod_turma,
 
 QString TurmaController::buscar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
     turma = nullptr;
-    turma = dao.buscar(new Turma(cod_disci,cod_turma,sub_turma,0,0));
+    turma = dao.buscar(new Turma(cod_disci,cod_turma,sub_turma));
     if(turma != nullptr)
         return turma->toString();
     else

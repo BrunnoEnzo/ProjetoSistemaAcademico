@@ -2,29 +2,17 @@
 
 AlunoDAO::AlunoDAO()
 {
-//    if (QSqlDatabase::contains("QSQLITE")) {
-//        db = QSqlDatabase::database("QSQLITE");
-//        db.close();
-//    }
-
-//    db = QSqlDatabase::addDatabase("QSQLITE");
-//    nomeBD = "C:\\Users\\GUARDIAN\\Downloads\\ProjetoSistemaAcademico\\academico.db";
-//    db.setDatabaseName(nomeBD);
 }
 
 void AlunoDAO::incluir(Aluno* obj){
-//    if (!db.open()){
-//        throw QString("Erro ao abrir o banco de dados");
-//    }
     DatabaseManager databaseManager;
-
     if (!databaseManager.open()) {
         throw QString("Erro ao abrir o banco de dados");
     }
     QSqlQuery query;
-    query.prepare("INSERT INTO aluno (mat_aluno, nom_aluno) VALUES (:mat, :nom);");
-    query.bindValue(":mat", obj->getMatricula());
-    query.bindValue(":nom", obj->getNome());
+    query.prepare("INSERT INTO aluno (mat_aluno, nom_aluno) VALUES (:mat_aluno, :nom_aluno);");
+    query.bindValue(":mat_aluno", obj->getMatricula());
+    query.bindValue(":nom_aluno", obj->getNome());
     if (!query.exec()){
         databaseManager.close();
         //db.close();
@@ -46,8 +34,8 @@ Aluno* AlunoDAO::buscar(Aluno* obj){
     QString matricula(""), nome("");
     QSqlQuery query;
     if (obj!=nullptr){
-        query.prepare("SELECT * FROM aluno WHERE mat_aluno = :mat;");
-        query.bindValue(":mat", obj->getMatricula());
+        query.prepare("SELECT * FROM aluno WHERE mat_aluno = :mat_aluno;");
+        query.bindValue(":mat_aluno", obj->getMatricula());
         if (!query.exec()){
             databaseManager.close();
             //db.close();
@@ -86,9 +74,9 @@ void AlunoDAO::alterar(Aluno* obj){
             throw QString("Erro ao abrir o banco de dados");
         }
         QSqlQuery query;
-        query.prepare("UPDATE aluno SET nom_aluno = :nom WHERE mat_aluno = :mat ;");
-        query.bindValue(":nom", obj->getNome());
-        query.bindValue(":mat", obj->getMatricula());
+        query.prepare("UPDATE aluno SET nom_aluno = :nom_aluno WHERE mat_aluno = :mat_aluno ;");
+        query.bindValue(":nom_aluno", obj->getNome());
+        query.bindValue(":mat_aluno", obj->getMatricula());
         if (!query.exec()){
             databaseManager.close();
             //db.close();
@@ -116,8 +104,8 @@ Aluno* AlunoDAO::remover(Aluno* obj){
             throw QString("Erro ao abrir o banco de dados");
         }
         QSqlQuery query;
-        query.prepare("DELETE FROM aluno WHERE mat_aluno = :mat ;");
-        query.bindValue(":mat", obj->getMatricula());
+        query.prepare("DELETE FROM aluno WHERE mat_aluno = :mat_aluno ;");
+        query.bindValue(":mat_aluno", obj->getMatricula());
         if (!query.exec()){
             databaseManager.close();
             //db.close();
