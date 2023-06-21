@@ -10,6 +10,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QStringList>
+#include <list>
 class TurmaDAO : public DAO<Turma>
 {
 private:
@@ -21,6 +23,7 @@ public:
     Turma* buscar(Turma* obj);
     void alterar(Turma* obj);
     Turma* remover(Turma* obj);
+    std::list<Turma*>* listarTurma();
 };
 
 #endif // TURMADAO_H

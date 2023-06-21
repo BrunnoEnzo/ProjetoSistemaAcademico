@@ -10,6 +10,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QStringList>
+#include <list>
 class AlunoDAO : public DAO<Aluno>
 {
 public:
@@ -18,6 +20,7 @@ public:
     Aluno* buscar(Aluno* obj);
     void alterar(Aluno* obj);
     Aluno* remover(Aluno* obj);
+    std::list<Aluno*>* listarAluno();
 private:
     QString nomeBD;
     QSqlDatabase db;

@@ -45,3 +45,8 @@ int const &ano,int const &semestre,float const &nota1,float const &nota2,float c
 void MatriculaController::remover(QString const &mat, QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
     dao.remover(new Matricula(mat,cod_turma,sub_turma,cod_disci));
 }
+
+std::list<Matricula*>* MatriculaController::lista(){
+    std::list<Matricula*>* listaMatricula = MatriculaDAO().listarMatricula();
+    return listaMatricula;
+}

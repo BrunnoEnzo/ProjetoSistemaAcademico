@@ -10,6 +10,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QStringList>
+#include <list>
 
 class DisciplinaDAO : public DAO<Disciplina>
 {
@@ -22,6 +24,7 @@ public:
     Disciplina* buscar(Disciplina* obj);
     void alterar(Disciplina* obj);
     Disciplina* remover(Disciplina* obj);
+    std::list<Disciplina*>* listarDisciplina();
 };
 
 #endif // DISCIPLINADAO_H

@@ -95,9 +95,6 @@ Aluno* AlunoDAO::remover(Aluno* obj){
         throw QString("Aluno não encontrado!");
     }
     else{
-//        if (!db.open()){
-//            throw QString("Erro ao abrir o banco de dados");
-//        }
         DatabaseManager databaseManager;
 
         if (!databaseManager.open()) {
@@ -108,11 +105,35 @@ Aluno* AlunoDAO::remover(Aluno* obj){
         query.bindValue(":mat_aluno", obj->getMatricula());
         if (!query.exec()){
             databaseManager.close();
-            //db.close();
             throw QString("Erro ao executar a delete");
         }
         databaseManager.close();
-        //db.close();
         delete obj;
     }
+}
+std::list<Aluno*>* AlunoDAO::listarAluno() {
+    std::list<Aluno*>* listaAlunos = new std::list<Aluno*>();
+
+    DatabaseManager databaseManager;
+    if (!databaseManager.open()) {
+        throw QString("Erro ao abrir o banco de dados");
+    }
+
+    QSqlQuery query("SELECT * FROM aluno;");
+    if (!query.exec()){
+        databaseManager.close();
+        throw QString("Erro ao executar a consulta");
+    }
+
+    while (query.next()) {
+        QString matricula = query.value("mat_aluno").toString();
+        QString nome = query.value("nom_aluno").toString();
+
+        Aluno* aluno = new Aluno(matricula, nome);
+        listaAlunos->push_back(aluno);
+    }
+
+    databaseManager.close();
+
+    return listaAlunos;
 }

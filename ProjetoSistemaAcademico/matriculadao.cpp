@@ -142,3 +142,37 @@ Matricula* MatriculaDAO::remover(Matricula* obj){
         delete obj;
     }
 }
+
+std::list<Matricula*>* MatriculaDAO::listarMatricula() {
+    std::list<Matricula*>* listaMatricula = new std::list<Matricula*>();
+
+    DatabaseManager databaseManager;
+    if (!databaseManager.open()) {
+        throw QString("Erro ao abrir o banco de dados");
+    }
+
+    QSqlQuery query("SELECT * FROM matricula;");
+    if (!query.exec()){
+        databaseManager.close();
+        throw QString("Erro ao executar a consulta");
+    }
+
+    while (query.next()) {
+        QString matricula1 = query.value("mat_aluno").toString();
+        QString codigoDisciplina = query.value("cod_disciplina").toString();
+        QString codigoTurma = query.value("cod_turma").toString();
+        int sub_turma = query.value("sub_turma").toInt();
+        int ano = query.value("ano").toInt();
+        int semestre = query.value("semestre").toInt();
+        float nota1 = query.value("nota1").toFloat();
+        float nota2 = query.value("nota2").toFloat();
+        float media = query.value("media").toFloat();
+
+        Matricula* matricula = new Matricula(matricula1, codigoTurma, sub_turma, codigoDisciplina, ano, semestre, nota1, nota2,media);
+        listaMatricula->push_back(matricula);
+    }
+
+    databaseManager.close();
+
+    return listaMatricula;
+}

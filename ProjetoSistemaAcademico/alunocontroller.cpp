@@ -39,3 +39,7 @@ void AlunoController::alterar(QString const &cod, QString const &nom){
 void AlunoController::remover(QString const &cod){
     dao.remover(new Aluno(cod));
 }
+std::list<Aluno*>* AlunoController::lista(){
+    std::list<Aluno*>* listaAlunos = AlunoDAO().listarAluno();
+    return listaAlunos;
+}

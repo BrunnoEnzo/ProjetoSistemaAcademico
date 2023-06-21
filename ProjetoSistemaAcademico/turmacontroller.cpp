@@ -40,3 +40,8 @@ void TurmaController::alterar(QString const &cod_disci,QString const &cod_turma,
 void TurmaController::remover(QString const &cod_disci,QString const &cod_turma,int const &sub_turma){
     dao.remover(new Turma(cod_disci,cod_turma,sub_turma));
 }
+
+std::list<Turma*>* TurmaController::lista(){
+    std::list<Turma*>* listaTurma = TurmaDAO().listarTurma();
+    return listaTurma;
+}

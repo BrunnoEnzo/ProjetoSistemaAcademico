@@ -13,6 +13,7 @@ public:
     QString buscar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
     void alterar(QString const &cod_disci,QString const &cod_turma,int const &sub_turma,int  const &maxAlunos,int const &numAlunos);
     void remover(QString const &cod_disci,QString const &cod_turma,int const &sub_turma);
+    std::list<Turma*>* lista();
 private:
     Turma* turma;
     TurmaDAO dao;

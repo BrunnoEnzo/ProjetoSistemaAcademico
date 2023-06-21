@@ -122,3 +122,33 @@ Turma* TurmaDAO::remover(Turma* obj){
         delete obj;
     }
 }
+
+std::list<Turma*>* TurmaDAO::listarTurma() {
+    std::list<Turma*>* listaTurma = new std::list<Turma*>();
+
+    DatabaseManager databaseManager;
+    if (!databaseManager.open()) {
+        throw QString("Erro ao abrir o banco de dados");
+    }
+
+    QSqlQuery query("SELECT * FROM turma;");
+    if (!query.exec()){
+        databaseManager.close();
+        throw QString("Erro ao executar a consulta");
+    }
+
+    while (query.next()) {
+        QString codigoDisciplina = query.value("cod_disciplina").toString();
+        QString codigoTurma = query.value("cod_turma").toString();
+        int sub_turma = query.value("sub_turma").toInt();
+        int max_alunos = query.value("max_alunos").toInt();
+        int num_alunos = query.value("num_alunos").toInt();
+
+        Turma* turma = new Turma(codigoDisciplina, codigoTurma, sub_turma, max_alunos, num_alunos);
+        listaTurma->push_back(turma);
+    }
+
+    databaseManager.close();
+
+    return listaTurma;
+}

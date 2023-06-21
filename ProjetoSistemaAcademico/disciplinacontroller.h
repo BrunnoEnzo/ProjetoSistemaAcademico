@@ -14,6 +14,7 @@ public:
     QString buscar(QString const &cod);
     void alterar(QString const &cod, QString const &nom);
     void remover(QString const &cod);
+    std::list<Disciplina*>* lista();
 private:
     Disciplina* disciplina;
     DisciplinaDAO dao;

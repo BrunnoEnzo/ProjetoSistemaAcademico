@@ -39,3 +39,8 @@ void DisciplinaController::alterar(QString const &cod, QString const &nom){
 void DisciplinaController::remover(QString const &cod){
     dao.remover(new Disciplina(cod));
 }
+
+std::list<Disciplina*>* DisciplinaController::lista(){
+    std::list<Disciplina*>* listaDisciplina = DisciplinaDAO().listarDisciplina();
+    return listaDisciplina;
+}

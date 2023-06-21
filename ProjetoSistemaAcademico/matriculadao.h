@@ -10,6 +10,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QStringList>
+#include <list>
 class MatriculaDAO : public DAO<Matricula>
 {
 private:
@@ -21,6 +23,7 @@ public:
     Matricula* buscar(Matricula* obj);
     void alterar (Matricula* obj);
     Matricula* remover(Matricula* obj);
+    std::list<Matricula*>* listarMatricula();
 };
 
 #endif // MATRICULADAO_H

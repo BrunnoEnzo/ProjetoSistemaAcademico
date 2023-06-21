@@ -99,3 +99,30 @@ Disciplina* DisciplinaDAO::remover(Disciplina* obj){
         delete obj;
     }
 }
+
+std::list<Disciplina*>* DisciplinaDAO::listarDisciplina() {
+    std::list<Disciplina*>* listaDisciplina = new std::list<Disciplina*>();
+
+    DatabaseManager databaseManager;
+    if (!databaseManager.open()) {
+        throw QString("Erro ao abrir o banco de dados");
+    }
+
+    QSqlQuery query("SELECT * FROM disciplina;");
+    if (!query.exec()){
+        databaseManager.close();
+        throw QString("Erro ao executar a consulta");
+    }
+
+    while (query.next()) {
+        QString codigo = query.value("cod_disciplina").toString();
+        QString nome = query.value("nom_disciplina").toString();
+
+        Disciplina* disciplina = new Disciplina(codigo, nome);
+        listaDisciplina->push_back(disciplina);
+    }
+
+    databaseManager.close();
+
+    return listaDisciplina;
+}

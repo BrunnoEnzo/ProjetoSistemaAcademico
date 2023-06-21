@@ -9,6 +9,11 @@
 #include <QMessageBox>
 #include <QString>
 #include <QMessageBox>
+#include <list>
+
+#include <QTableView>
+#include <QStandardItemModel>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -61,6 +66,11 @@ private:
     DisciplinaController controleDisciplina;
     TurmaController controleTurma;
     MatriculaController controleMatricula;
+    QStandardItemModel *modelAluno;
+    QStandardItemModel *modelDisciplina;
+    QStandardItemModel *modelTurma;
+    QStandardItemModel *modelMatricula;
+    QTableView *tableView;
 
 };
 #endif // MAINWINDOW_H
