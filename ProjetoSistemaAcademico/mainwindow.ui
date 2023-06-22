@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>785</width>
+    <width>791</width>
     <height>389</height>
    </rect>
   </property>
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Aluno">
      <attribute name="title">
@@ -36,7 +36,7 @@
         <x>10</x>
         <y>111</y>
         <width>761</width>
-        <height>201</height>
+        <height>211</height>
        </rect>
       </property>
      </widget>
@@ -135,7 +135,7 @@
         <x>10</x>
         <y>170</y>
         <width>761</width>
-        <height>141</height>
+        <height>151</height>
        </rect>
       </property>
      </widget>
@@ -329,7 +329,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditNotaFinal"/>
+        <widget class="QLineEdit" name="lineEditNotaFinal">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -388,7 +392,7 @@
         <x>10</x>
         <y>140</y>
         <width>761</width>
-        <height>171</height>
+        <height>181</height>
        </rect>
       </property>
      </widget>
@@ -538,7 +542,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditNumeroTurma"/>
+        <widget class="QLineEdit" name="lineEditNumeroTurma">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -553,7 +561,7 @@
         <x>10</x>
         <y>110</y>
         <width>761</width>
-        <height>201</height>
+        <height>211</height>
        </rect>
       </property>
      </widget>
@@ -649,7 +657,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>785</width>
+     <width>791</width>
      <height>22</height>
     </rect>
    </property>

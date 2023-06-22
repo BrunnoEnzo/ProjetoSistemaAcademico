@@ -182,6 +182,8 @@ void MainWindow::on_pushButtonIncluirAluno_clicked()//Incluir Aluno
             throw QString("Aluno já existente");
         }
         else{
+            if(ui->lineEditMatriculaAluno->text()=="") throw QString("Por favor, digite a Matricula.");
+            if(ui->lineEditNome->text()=="") throw QString("Por favor, digite o Nome.");
             controleAluno.incluir(ui->lineEditMatriculaAluno->text(), ui->lineEditNome->text());
             QMessageBox::information(this, "Ok", "Aluno incluído com sucesso!");
             ui->lineEditMatriculaAluno->clear();
@@ -235,6 +237,7 @@ void MainWindow::on_pushButtonAtualizarAluno_clicked()//Atualizar Aluno
 {
     try{
         if(controleAluno.analisarAluno(ui->lineEditMatriculaAluno->text())){
+            if(ui->lineEditNome->text()=="") throw QString("Por favor, digite o Nome.");
             controleAluno.alterar(ui->lineEditMatriculaAluno->text(), ui->lineEditNome->text());
             QMessageBox::information(this, "Ok", "Aluno alterado com sucesso!");
             ui->lineEditMatriculaAluno->setFocus();
@@ -318,6 +321,8 @@ void MainWindow::on_pushButtonIncluirDisciplina_clicked()//Incluir Disciplina
             throw QString("Disciplina já existente");
         }
         else{
+            if(ui->lineEditCodigoDisciplina->text()=="") throw QString("Por favor, digite o Codigo.");
+            if(ui->lineEditNomeDisciplina->text()=="") throw QString("Por favor, digite o Nome.");
             controleDisciplina.incluir(ui->lineEditCodigoDisciplina->text(), ui->lineEditNomeDisciplina->text());
             QMessageBox::information(this, "Ok", "Disciplina incluído com sucesso!");
             ui->lineEditCodigoDisciplina->clear();
@@ -371,6 +376,7 @@ void MainWindow::on_pushButtonAtualizarDisciplina_clicked()//Atualizar Disciplin
 {
     try{
         if(controleDisciplina.analisarDisciplina(ui->lineEditCodigoDisciplina->text())){
+            if(ui->lineEditNomeDisciplina->text()=="") throw QString("Por favor, digite o Nome.");
             controleDisciplina.alterar(ui->lineEditCodigoDisciplina->text(), ui->lineEditNomeDisciplina->text());
             QMessageBox::information(this, "Ok", "Diciplina alterado com sucesso!");
             ui->lineEditCodigoDisciplina->setFocus();
@@ -455,8 +461,11 @@ void MainWindow::on_pushButtonIncluirTurma_clicked()//Incluir Turma
                 throw QString("Turma já existente");
             }
             else{
+                if(ui->lineEditCodDisciplinaTurma->text()=="") throw QString("Por favor, digite o Codigo de Disciplina.");
+                if(ui->lineEditCodigoTurma->text()=="") throw QString("Por favor, digite o codigo de Turma.");
+                if(ui->lineEditMaximoTurma->text()=="") throw QString("Por favor, digite o Maximo de Alunos da Turma.");
                 controleTurma.incluir(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
-                ui->lineEditSubTurma->text().toInt(),ui->lineEditMaximoTurma->text().toInt(),ui->lineEditNumeroTurma->text().toInt());
+                ui->lineEditSubTurma->text().toInt(),ui->lineEditMaximoTurma->text().toInt(),/*ui->lineEditNumeroTurma->text().toInt()*/ 0);
                 QMessageBox::information(this, "Ok", "Turma incluída com sucesso!");
                 ui->lineEditCodDisciplinaTurma->clear();
                 ui->lineEditCodigoTurma->clear();
@@ -529,6 +538,7 @@ void MainWindow::on_pushButtonAtualizarTurma_clicked()//Atualizar Turma
 {
     try{
         if(controleTurma.analisarTurma(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),ui->lineEditSubTurma->text().toInt())){
+            if(ui->lineEditMaximoTurma->text()=="") throw QString("Por favor, digite o Maximo de Alunos da Turma.");
             controleTurma.alterar(ui->lineEditCodDisciplinaTurma->text(),ui->lineEditCodigoTurma->text(),
             ui->lineEditSubTurma->text().toInt(),ui->lineEditMaximoTurma->text().toInt(),ui->lineEditNumeroTurma->text().toInt());
             QMessageBox::information(this, "Ok", "Diciplina alterado com sucesso!");
@@ -642,6 +652,15 @@ void MainWindow::on_pushButtonIncluirMatricula_clicked()//Incluir Matricula
                     throw QString("Matricula já existente");
                 }
                 else{
+                    if(ui->lineEditMatricula->text()=="") throw QString("Por favor, digite a Matricula.");
+                    if(ui->lineEditCodDisciplinaMatricula->text()=="") throw QString("Por favor, digite o Codigo de Matricula.");
+                    if(ui->lineEditCodTurmaMatricula->text()=="") throw QString("Por favor, digite o Codigo de turma.");
+                    if(ui->lineEditAnoMatricula->text()=="") throw QString("Por favor, digite o Ano.");
+                    if(ui->lineEditSemestreMatricula->text()=="") throw QString("Por favor, digite o Semestre.");
+                    if(ui->lineEditNota1Matricula->text()=="") throw QString("Por favor, digite a Nota 1.");
+                    if(ui->lineEditNota2Matricula->text()=="") throw QString("Por favor, digite a Nota 2.");
+                    if(ui->lineEditNota1Matricula->text().toFloat()<0 || ui->lineEditNota1Matricula->text().toFloat()>10) throw QString("Por favor, digite em Nota 1 um valor de 0 ate 10.");
+                    if(ui->lineEditNota2Matricula->text().toFloat()<0 || ui->lineEditNota2Matricula->text().toFloat()>10) throw QString("Por favor, digite em Nota 2 um valor de 0 ate 10.");
                     float notaf=(ui->lineEditNota1Matricula->text().toFloat()+ui->lineEditNota2Matricula->text().toFloat())/2;
                     controleMatricula.incluir(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
                     ui->lineEditAnoMatricula->text().toInt(),ui->lineEditSemestreMatricula->text().toInt(),ui->lineEditNota1Matricula->text().toFloat(),ui->lineEditNota2Matricula->text().toFloat(),notaf);
@@ -703,6 +722,44 @@ void MainWindow::on_pushButtonIncluirMatricula_clicked()//Incluir Matricula
                         modelMatricula->setItem(row, 8, itemNotaF);
                         row++;
                     }//Fim
+
+                    //Atualizar numero de estudantes da turma
+                    QString info = controleTurma.buscar(ui->lineEditCodDisciplinaMatricula->text(), ui->lineEditCodTurmaMatricula->text(), ui->lineEditSubTurmaMatricula->text().toInt());
+                    QStringList Info = info.split(";");
+                    QString max=Info[2],num=Info[3];
+                    controleTurma.alterar(ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
+                    max.toInt(),(num.toInt()+1));
+                    std::list<Turma*>* listaTurma = controleTurma.lista();//TableView
+                    modelTurma = new QStandardItemModel(this);
+                    modelTurma->setColumnCount(5);
+                    modelTurma->setHeaderData(0, Qt::Horizontal, "Disciplina");
+                    modelTurma->setHeaderData(1, Qt::Horizontal, "Turma");
+                    modelTurma->setHeaderData(2, Qt::Horizontal, "Sub-Turma");
+                    modelTurma->setHeaderData(3, Qt::Horizontal, "Max_Alunos");
+                    modelTurma->setHeaderData(4, Qt::Horizontal, "Num_Alunos");
+                    tableView = ui->tableViewTurma;
+                    tableView->setModel(modelTurma);
+                    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+                    tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+                    row = 0;
+                    for (Turma* turma : *listaTurma) {
+                        QString cod_disciplina = turma->getCod_disciplina();
+                        QString cod_turma = turma->getCod_turma();
+                        QString sub_turma = QString::number(turma->getSub_turma());
+                        QString max_alunos = QString::number(turma->getMaxAlunos());
+                        QString num_alunos = QString::number(turma->getNumAlunos());
+                        QStandardItem* itemCod_disciplina = new QStandardItem(cod_disciplina);
+                        QStandardItem* itemCod_turma = new QStandardItem(cod_turma);
+                        QStandardItem* itemSub_turma = new QStandardItem(sub_turma);
+                        QStandardItem* itemMax_alunos = new QStandardItem(max_alunos);
+                        QStandardItem* itemNum_alunos = new QStandardItem(num_alunos);
+                        modelTurma->setItem(row, 0, itemCod_disciplina);
+                        modelTurma->setItem(row, 1, itemCod_turma);
+                        modelTurma->setItem(row, 2, itemSub_turma);
+                        modelTurma->setItem(row, 3, itemMax_alunos);
+                        modelTurma->setItem(row, 4, itemNum_alunos);
+                        row++;
+                    }//Fim
                 }
             }
             else{
@@ -743,6 +800,10 @@ void MainWindow::on_pushButtonAtualizarMatricula_clicked()//Atualizar Matricula
 {
     try{
         if(controleMatricula.analisarMatricula(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt())){
+            if(ui->lineEditAnoMatricula->text()=="") throw QString("Por favor, digite o Ano.");
+            if(ui->lineEditSemestreMatricula->text()=="") throw QString("Por favor, digite o Semestre.");
+            if(ui->lineEditNota1Matricula->text()=="") throw QString("Por favor, digite a Nota 1.");
+            if(ui->lineEditNota2Matricula->text()=="") throw QString("Por favor, digite a Nota 2.");
             float notaf=(ui->lineEditNota1Matricula->text().toFloat()+ui->lineEditNota2Matricula->text().toFloat())/2;
             controleMatricula.alterar(ui->lineEditMatricula->text(),ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
             ui->lineEditAnoMatricula->text().toInt(),ui->lineEditSemestreMatricula->text().toInt(),ui->lineEditNota1Matricula->text().toFloat(),ui->lineEditNota2Matricula->text().toFloat(),notaf);
@@ -870,6 +931,44 @@ void MainWindow::on_pushButtonRemoverMatricula_clicked()//Remover Matricula
                 modelMatricula->setItem(row, 6, itemNota1);
                 modelMatricula->setItem(row, 7, itemNota2);
                 modelMatricula->setItem(row, 8, itemNotaF);
+                row++;
+            }//Fim
+
+            //Atualizar numero de estudantes da turma
+            QString info = controleTurma.buscar(ui->lineEditCodDisciplinaMatricula->text(), ui->lineEditCodTurmaMatricula->text(), ui->lineEditSubTurmaMatricula->text().toInt());
+            QStringList Info = info.split(";");
+            QString max=Info[2],num=Info[3];
+            controleTurma.alterar(ui->lineEditCodDisciplinaMatricula->text(),ui->lineEditCodTurmaMatricula->text(),ui->lineEditSubTurmaMatricula->text().toInt(),
+                                  max.toInt(),(num.toInt()-1));
+            std::list<Turma*>* listaTurma = controleTurma.lista();//TableView
+            modelTurma = new QStandardItemModel(this);
+            modelTurma->setColumnCount(5);
+            modelTurma->setHeaderData(0, Qt::Horizontal, "Disciplina");
+            modelTurma->setHeaderData(1, Qt::Horizontal, "Turma");
+            modelTurma->setHeaderData(2, Qt::Horizontal, "Sub-Turma");
+            modelTurma->setHeaderData(3, Qt::Horizontal, "Max_Alunos");
+            modelTurma->setHeaderData(4, Qt::Horizontal, "Num_Alunos");
+            tableView = ui->tableViewTurma;
+            tableView->setModel(modelTurma);
+            tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+            tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+            row = 0;
+            for (Turma* turma : *listaTurma) {
+                QString cod_disciplina = turma->getCod_disciplina();
+                QString cod_turma = turma->getCod_turma();
+                QString sub_turma = QString::number(turma->getSub_turma());
+                QString max_alunos = QString::number(turma->getMaxAlunos());
+                QString num_alunos = QString::number(turma->getNumAlunos());
+                QStandardItem* itemCod_disciplina = new QStandardItem(cod_disciplina);
+                QStandardItem* itemCod_turma = new QStandardItem(cod_turma);
+                QStandardItem* itemSub_turma = new QStandardItem(sub_turma);
+                QStandardItem* itemMax_alunos = new QStandardItem(max_alunos);
+                QStandardItem* itemNum_alunos = new QStandardItem(num_alunos);
+                modelTurma->setItem(row, 0, itemCod_disciplina);
+                modelTurma->setItem(row, 1, itemCod_turma);
+                modelTurma->setItem(row, 2, itemSub_turma);
+                modelTurma->setItem(row, 3, itemMax_alunos);
+                modelTurma->setItem(row, 4, itemNum_alunos);
                 row++;
             }//Fim
         }

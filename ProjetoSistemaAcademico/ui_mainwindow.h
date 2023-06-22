@@ -142,7 +142,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(785, 389);
+        MainWindow->resize(791, 389);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         tabWidget = new QTabWidget(centralwidget);
@@ -152,7 +152,7 @@ public:
         Aluno->setObjectName("Aluno");
         tableViewAluno = new QTableView(Aluno);
         tableViewAluno->setObjectName("tableViewAluno");
-        tableViewAluno->setGeometry(QRect(10, 111, 761, 201));
+        tableViewAluno->setGeometry(QRect(10, 111, 761, 211));
         layoutWidget = new QWidget(Aluno);
         layoutWidget->setObjectName("layoutWidget");
         layoutWidget->setGeometry(QRect(10, 80, 761, 26));
@@ -216,7 +216,7 @@ public:
         Matricula->setObjectName("Matricula");
         tableViewMatricula = new QTableView(Matricula);
         tableViewMatricula->setObjectName("tableViewMatricula");
-        tableViewMatricula->setGeometry(QRect(10, 170, 761, 141));
+        tableViewMatricula->setGeometry(QRect(10, 170, 761, 151));
         layoutWidget3 = new QWidget(Matricula);
         layoutWidget3->setObjectName("layoutWidget3");
         layoutWidget3->setGeometry(QRect(10, 140, 761, 26));
@@ -352,6 +352,7 @@ public:
 
         lineEditNotaFinal = new QLineEdit(layoutWidget10);
         lineEditNotaFinal->setObjectName("lineEditNotaFinal");
+        lineEditNotaFinal->setEnabled(false);
 
         verticalLayout->addWidget(lineEditNotaFinal);
 
@@ -392,7 +393,7 @@ public:
         Turma->setObjectName("Turma");
         tableViewTurma = new QTableView(Turma);
         tableViewTurma->setObjectName("tableViewTurma");
-        tableViewTurma->setGeometry(QRect(10, 140, 761, 171));
+        tableViewTurma->setGeometry(QRect(10, 140, 761, 181));
         layoutWidget13 = new QWidget(Turma);
         layoutWidget13->setObjectName("layoutWidget13");
         layoutWidget13->setGeometry(QRect(10, 110, 761, 26));
@@ -496,6 +497,7 @@ public:
 
         lineEditNumeroTurma = new QLineEdit(layoutWidget18);
         lineEditNumeroTurma->setObjectName("lineEditNumeroTurma");
+        lineEditNumeroTurma->setEnabled(false);
 
         horizontalLayout_19->addWidget(lineEditNumeroTurma);
 
@@ -504,7 +506,7 @@ public:
         Disciplina->setObjectName("Disciplina");
         tableViewDisciplina = new QTableView(Disciplina);
         tableViewDisciplina->setObjectName("tableViewDisciplina");
-        tableViewDisciplina->setGeometry(QRect(10, 110, 761, 201));
+        tableViewDisciplina->setGeometry(QRect(10, 110, 761, 211));
         layoutWidget19 = new QWidget(Disciplina);
         layoutWidget19->setObjectName("layoutWidget19");
         layoutWidget19->setGeometry(QRect(10, 80, 761, 26));
@@ -567,7 +569,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 785, 22));
+        menubar->setGeometry(QRect(0, 0, 791, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -575,7 +577,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
